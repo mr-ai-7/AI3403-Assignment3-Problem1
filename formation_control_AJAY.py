@@ -18,9 +18,8 @@ HOLD_STEPS = 15
 
 rng = np.random.default_rng(SEED)
 
-# ------------------------------------------------------------
 # 1. Generate a connected Erdos-Renyi graph G(N,p)
-# ------------------------------------------------------------
+
 while True:
     G = nx.erdos_renyi_graph(N, P, seed=int(rng.integers(1_000_000_000)))
     if nx.is_connected(G):
@@ -90,9 +89,8 @@ def sample_segments(segments, n):
 
     return points
 
-# ------------------------------------------------------------
 # 2. Define 20 desired positions for each capital letter
-# ------------------------------------------------------------
+
 letters = {}
 
 letters["A"] = sample_segments([
@@ -127,9 +125,9 @@ targets = {ch: pts + center for ch, pts in letters.items()}
 
 sequence = list("AJAY")
 
-# ------------------------------------------------------------
+
 # 3. Simulate the formation-control dynamics
-# ------------------------------------------------------------
+
 frames = [X.copy()]
 labels = ["Initial random positions"]
 
@@ -169,9 +167,8 @@ for letter in sequence:
 
 frames = np.asarray(frames)
 
-# ------------------------------------------------------------
 # 4. Create animation
-# ------------------------------------------------------------
+
 fig, ax = plt.subplots(figsize=(8, 6))
 ax.set_xlim(center[0] - 4.5, center[0] + 4.5)
 ax.set_ylim(center[1] - 4.5, center[1] + 4.5)
